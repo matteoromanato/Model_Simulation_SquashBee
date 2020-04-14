@@ -167,7 +167,7 @@ class Zucca(Agent):
     def step(self):
         self.time_life -= 1
         if(self.time_life == 0):
-            i=0
+            #i=0
             for neighbor in self.model.grid.neighbor_iter(self.pos):
                 possible_steps = self.model.grid.get_neighborhood(neighbor.pos,moore=True,include_center=False)
                 new_position = self.random.choice(possible_steps)
@@ -175,8 +175,8 @@ class Zucca(Agent):
                     new_seme = Zucca_seed(new_position, self.model)
                     self.model.grid._place_agent(new_position, new_seme)
                     self.model.schedule.add(new_seme)
-                    i+=1
-                    print("nuovi semi :" + str(i))
+                    #i+=1
+                    #print("nuovi semi :" + str(i))
                 
             self.model.grid._remove_agent(self.pos, self)
             self.model.schedule.remove(self)    
