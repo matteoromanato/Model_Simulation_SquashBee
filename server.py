@@ -10,7 +10,7 @@ def Squash_Bee_portrayal(agent):
     
     if agent is None:
         return
-    portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true", "Layer": 0}
+    portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true"}
 
     if type(agent) is Bee:
         portrayal["Color"] = ["#FFFF00", "#FFFF00"]

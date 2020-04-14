@@ -26,8 +26,8 @@ class Bee(Agent):
         # deve muoversi a caso alla ricerca di un fiore
         possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
         new_position = self.random.choice(possible_steps)
-        if(self.model.grid.is_cell_empty(new_position)):
-            self.model.grid.move_agent(self, new_position)
+        #if(self.model.grid.is_cell_empty(new_position)):
+        self.model.grid.move_agent(self, new_position)
 
         # deve trovare e depositare la larva vicino ad una zucca
         if self.gender == "Female":
