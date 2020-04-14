@@ -1,6 +1,6 @@
 
 from mesa import Model
-from mesa.space import Grid
+from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
 from mesa.time import RandomActivation
 from collections import defaultdict
@@ -22,7 +22,7 @@ class SquashBee(Model):
 
 
         self.schedule = RandomActivation(self)
-        self.grid = Grid(width, height, torus=True)
+        self.grid = MultiGrid(self.width, self.height, torus=True)
 
        
         self.datacollector = DataCollector(
