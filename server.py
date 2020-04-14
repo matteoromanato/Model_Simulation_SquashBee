@@ -13,6 +13,8 @@ def Squash_Bee_portrayal(agent):
     portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true"}
 
     if type(agent) is Bee:
+        #portrayal["Shape"] = "ape.jfif"
+        #portrayal["scale"] = 0.9
         portrayal["Color"] = ["#FFFF00", "#FFFF00"]
         portrayal["stroke_color"] = "#000000"
         portrayal["text"] = round(agent.energy, 1)
