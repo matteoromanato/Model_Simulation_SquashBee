@@ -1,0 +1,67 @@
+SQUASH BEE
+
+sono api che servono per coltivazione di zucche, perchè impollinano i fiori in primavera e se i fiori vengono impollinati cresce il frutto se no no .
+queste api non creano alveari, depositano i loro figli vicino alle zucche e in primavera nascono e in primavera muoiono.
+
+le fasi dell'ape sono :
+						sopravvivere nella tana con il polline fino alla primavera.
+						emergere dalla tana in primavera.
+						trovare una zucca.
+						incrontrasi con una femmina/maschio.
+						produrre prole e metterla vicino ad una zucca.
+
+SCOPO DEL MODELLO
+
+	il modello può essere utilizzato per esplorare l'impatto delle diverse pratiche agricole sulle popolazioni di api da zucca le quali incideranno sul raccolto.
+	si potrà successivamnete metterlo a confronto con api normali le quali saranno generate ad ogni primavera e avranno vita di circa 150 gg avranno il compito solo di impollinare i fiori di zucca.
+	
+	Le api hanno bisogno di 3 cose per sopravvivere: cibo, luogo dove nidificare(vicino alla zucca) e protezione dai pesticidi.
+	
+	I coltivatori possono quindi decidere: 	DOVE PIANTARE LE ZUCCHE 
+											SE USARE PESTICIDI
+											SE ARARE IL CAMPO (con una certa prob uccidi le larve quando finiscono le zucche)
+	
+	le api dovranno fare: 	NASCERE 
+							TROVARE UN FIORE (FERMARSI PER UN TOT, RACCOGLIERE POLLINE , INCONTRARE ALTRE API SE DI SESSO OPPOSTO RIPRODURSI)
+							PARTIRE DAL FIORE (CON POLLINE DEL FIORE CHE ANDRA' A FECONDARE ALTRO FIORE E SE INCONTRATO SESSO OPPOSTO SARA' INCINTA E ANDRA' A DEPOSITARE IL FIGLIO VICINO AD UNA ZUCCA)
+							REPEAT
+							MUORE DOPO ESTATE(VITA APE = 1.5 STAGIONI = 150GG
+
+	
+	
+	
+MODELLO: multi griglia
+			
+			livello 1  : zucche 
+			livello 2 : api
+			
+			dovrà inizialmente disporre le zucche con una certa dentisà (in una determinata zona)
+			dovrà inizialmente disporre le api con una certa densità
+			
+			IMPORTANTE : 	nel modello nella funzione step quando le zucche non ci saranno più dovrò fare la semina
+							possiamo scegliere se seminare a caso o in macro zone specifiche 
+			
+AGENTI:
+
+		api ( self, pos, model, type_agent, gender, time_life, polline_perc, time_son, power) 
+			devono muoversi per trovare un fiore e mangiare polline se no muoiono (power = 0)
+			andando sul fiore aumenta la loro percentuale di polline trasportabile (parametro di percentuale che aumenta scelto dall'utente)
+			il parametro power viene aumentato quando si posa su un fiore e diminuisce ad ogni step
+			il gender definito dall'esterno indica la percentuale che sia femmina l'ape
+			time_son indica quanto tempo impiega ad essere pronta la larva da depositare(pochi giorni) , se no muore e l'ape può ospitare un nuovo figlio 
+			
+		
+		seme_zucca( self, pos, modello, time_grow)
+			viene messo nel terreno e ci vuole time_grow prima che diventi un fiore (deciso da un valore in percentuale)
+		
+		fiore_zucche ( self, pos, model, impollinato, time_life)
+			compare con una certa probabilità dopo che finisce il time_grow del seme_zucca
+			il fiore se viene a contatto con un'ape può diventare impollinato in base alla percentuale di polline che l'ape porta
+			il fiore scaduto il time_life  e se è stato impollinato può trasformarsi in una zucca( deciso da un valore in percentuale)
+		
+		zucca(self, pos , model, time_life, pesticida)
+			il parametro pesticida limita la possibilità delle api di depositare la larva vicino alla zucca
+		
+		larva(self, pos, model, time_status)
+			può essere posizionata solo vicino ad una zucca e dopo il periodo di incubazione definito dal time_status diventerà un' ape ( in base a un parametro deciso dall'utente)
+	
