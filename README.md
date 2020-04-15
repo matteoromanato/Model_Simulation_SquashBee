@@ -7,7 +7,7 @@ L'ape di zucca ( Peponapis pruinosa ) è un'ape selvaggia e nativa che impollina
 
 # AGENTI 
 #### APE
-L' ape è definita ( posizione, tipo di agente, tempo di vita tra 130 a 170 step, quantità di polline che trasporta, miglioramento da to dal polline, energia, sesso, nel caso sia femmina c'è un parametro che dice se è incinta o no).
+L' ape è definita ( posizione, tipo di agente, tempo di vita, quantità di polline che trasporta, miglioramento da to dal polline, energia, sesso, nel caso sia femmina c'è un parametro che dice se è incinta o no).
 
 Ad ogni step l'ape deve : 
                           - spostarsi alla ricerca di un fiore
