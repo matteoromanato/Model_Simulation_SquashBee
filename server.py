@@ -45,7 +45,7 @@ def Squash_Bee_portrayal(agent):
 
 
 canvas_element = CanvasGrid(Squash_Bee_portrayal, 50, 50, 500, 500)
-chart_element = ChartModule([{"Label": "Zucche_fiori", "Color": "#8AFB17"},
+chart_element = ChartModule([{"Label": "Zucche_fiori", "Color": "#8AF017"},
                                 {"Label": "Zucche", "Color": "#FBB917"},
                                 {"Label": "Seed", "Color": "#C8B560"},
                                 {"Label": "Api", "Color": "#FFFF00"},
