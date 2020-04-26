@@ -2,7 +2,7 @@ from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.UserParam import UserSettableParameter
 
-from agents import Bee, Bee_son, Zucca_seed, Zucca_flower, Zucca
+from agents import *
 from model import SquashBee
 
 
@@ -41,6 +41,10 @@ def Squash_Bee_portrayal(agent):
         portrayal["Color"] = ["#C8B560", "#C8B560"]
         portrayal["stroke_color"] = "#000000"
         portrayal["Layer"] = 0
+    if type(agent) is flower:
+        portrayal["Color"] = ["#FF0000", "#FF0000"]
+        portrayal["stroke_color"] = "#000000"
+        portrayal["Layer"] = 1
     return portrayal
 
 
@@ -54,9 +58,10 @@ chart_element = ChartModule([{"Label": "Zucche_fiori", "Color": "#8AF017"},
 model_params = {"density_bee": UserSettableParameter('slider', 'numero di api nel prato', 180, 0, 500),
                 "density_gender_bee": UserSettableParameter('slider', 'Densità di api femmine', 60, 0, 100),
                 "gain_polline_raccolto": UserSettableParameter('slider', 'guadagno energia dal polline', 60, 0, 100),
-                "density_zucca": UserSettableParameter('slider', 'numero di fiori di zucca nel prato', 370, 1, 500),
+                "density_zucca": UserSettableParameter('slider', 'numero di fiori di zucca nel prato', 200, 1, 500),
                 "prob_accoppiamento": UserSettableParameter('slider', 'probabilità di accoppiamento tra due api', 80, 0, 100),
-                "prob_semina": UserSettableParameter('slider', 'probabilità di semina dopo zucca', 70, 0, 100)}
+                "offsetX": UserSettableParameter('slider', 'spostamento campo X', 5, 0, 20),
+                "offsetY": UserSettableParameter('slider', 'spostamento campo Y', 5, 0, 20)}
 
 server = ModularServer(SquashBee, [canvas_element, chart_element], "Simulazione comportamento dell'ape della zucca", model_params)
 server.port = 8521

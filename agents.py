@@ -24,7 +24,7 @@ class Bee(Agent):
 
     def step(self):
         # deve muoversi a caso alla ricerca di un fiore
-        possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
+        possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,radius = 2,include_center=False)
         new_position = self.random.choice(possible_steps)
         #if(self.model.grid.is_cell_empty(new_position)):
         self.model.grid.move_agent(self, new_position)
@@ -45,11 +45,6 @@ class Bee(Agent):
                             #self.time_son = 5
                             self.newSon= False
                 
-
-
-
-
-
         # se finisce il tempo allora muore e la rimuovo
         self.time_life -= 1
         self.energy -= 1
@@ -57,10 +52,7 @@ class Bee(Agent):
             self.model.grid._remove_agent(self.pos, self)
             self.model.schedule.remove(self)
         
-        
-            
-
-        
+               
 
 class Bee_son(Agent):
 
@@ -69,7 +61,7 @@ class Bee_son(Agent):
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Bee_son"
-        self.time_grow = randint(170,210)
+        self.time_grow = randint(230,260)
         
 
     def step(self):
@@ -91,7 +83,7 @@ class Zucca_seed(Agent):
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Seed"
-        self.time_life = randint(80,140)
+        self.time_life = randint(10,20)
 
     def step(self):
         self.time_life -= 1
@@ -100,20 +92,20 @@ class Zucca_seed(Agent):
             self.model.grid._remove_agent(self.pos, self)
             self.model.schedule.remove(self)
             # fingiamo che quando muore a zucca si pianta un seme
-            new_flower = Zucca_flower(posizione, self.model, self.model.prob_accoppiamento)
+            new_flower = Zucca_flower(posizione, self.model, self.model.prob_accoppiamento,45)
             self.model.grid.place_agent(new_flower, posizione)
             self.model.schedule.add(new_flower)
         
 
 class Zucca_flower(Agent):
    
-    def __init__(self,pos,model, prob_accoppiamento):
+    def __init__(self,pos,model, prob_accoppiamento, time):
 
         super().__init__(pos,model)
         self.pos = pos
         self.impollinato = False
         self.type_agent = "Flower"
-        self.time_life = randint(70,130)
+        self.time_life = randint(time-20,time+20)          #inizialmente range(10,30) successivamente range(35,55)
         self.prob_accoppiamento = prob_accoppiamento
         
     
@@ -157,26 +149,57 @@ class Zucca_flower(Agent):
 
 class Zucca(Agent):
 
+
     def __init__(self,pos,model):
 
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Zucca"
-        self.time_life = randint(90,140)
+        self.time_life = randint(40,60)
 
     def step(self):
         self.time_life -= 1
         if(self.time_life == 0):
+            """
             #i=0
             for neighbor in self.model.grid.neighbor_iter(self.pos):
                 possible_steps = self.model.grid.get_neighborhood(neighbor.pos,moore=True,include_center=False)
                 new_position = self.random.choice(possible_steps)
+                
                 if self.model.grid.is_cell_empty(new_position) and randint(1,100)<self.model.prob_semina:
                     new_seme = Zucca_seed(new_position, self.model)
                     self.model.grid._place_agent(new_position, new_seme)
                     self.model.schedule.add(new_seme)
                     #i+=1
                     #print("nuovi semi :" + str(i))
-                
+                """
             self.model.grid._remove_agent(self.pos, self)
             self.model.schedule.remove(self)    
+
+
+class flower(Agent):
+   
+    def __init__(self,pos,model, ):
+
+        super().__init__(pos,model)
+        self.pos = pos
+        self.type_agent = "Flower_Random"
+        self.time_life = randint(90-10,90+10)          #inizialmente range(10,30) successivamente range(35,55)
+        
+        
+    
+    def step(self):
+
+        for neighbor in self.model.grid.neighbor_iter(self.pos):
+            if neighbor.type_agent == "Bee":
+                neighbor.energy = neighbor.gain_polline*0.6
+                
+               
+
+        # se il tempo di vita finisce appassisce e muore
+        # se è stato impollinato però si trasforma in zucca
+        self.time_life -= 1
+        if(self.time_life == 0):
+            self.model.grid._remove_agent(self.pos, self)
+            self.model.schedule.remove(self)
+            
