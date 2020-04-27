@@ -73,27 +73,30 @@ class SquashBee(Model):
             for i in range(150):   
                 x = self.random.randrange(self.height)       
                 y = self.random.randrange(self.width)
-                new_f = flower((x,y), self)
-                self.grid._place_agent((x,y), new_f)
-                self.schedule.add(new_f)
+                if(self.grid.is_cell_empty((x,y))):
+                    new_f = flower((x,y), self)
+                    self.grid._place_agent((x,y), new_f)
+                    self.schedule.add(new_f)
 
         # semina ogni anno
         if self.time == 160:
-            # metto i fiori delle zucche nella griglia
+            # metto i semi delle zucche nella griglia
             if self.anno%2 == 0:
                 for i in range(self.density_zucca):   
                     x = self.random.randrange(5 + self.offsetX,30 + self.offsetX)       
                     y = self.random.randrange(5 + self.offsetY,30 + self.offsetY)
-                    new_seme = Zucca_seed((x,y), self)
-                    self.grid._place_agent((x,y), new_seme)
-                    self.schedule.add(new_seme)
+                    if(self.grid.is_cell_empty((x,y))):
+                        new_seme = Zucca_seed((x,y), self)
+                        self.grid._place_agent((x,y), new_seme)
+                        self.schedule.add(new_seme)
             if self.anno%2 == 1:
                 for i in range(self.density_zucca):   
                     x = self.random.randrange(5,30)       
                     y = self.random.randrange(5,30)
-                    new_seme = Zucca_seed((x,y), self)
-                    self.grid._place_agent((x,y), new_seme)
-                    self.schedule.add(new_seme)
+                    if(self.grid.is_cell_empty((x,y))):
+                        new_seme = Zucca_seed((x,y), self)
+                        self.grid._place_agent((x,y), new_seme)
+                        self.schedule.add(new_seme)
 
 
         # reset anno

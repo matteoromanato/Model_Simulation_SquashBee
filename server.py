@@ -42,7 +42,7 @@ def Squash_Bee_portrayal(agent):
         portrayal["stroke_color"] = "#000000"
         portrayal["Layer"] = 0
     if type(agent) is flower:
-        portrayal["Color"] = ["#FF0000", "#FF0000"]
+        portrayal["Color"] = ["#FCDFFF", "#FCDFFF"]
         portrayal["stroke_color"] = "#000000"
         portrayal["Layer"] = 1
     return portrayal

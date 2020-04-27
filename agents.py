@@ -184,7 +184,7 @@ class flower(Agent):
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Flower_Random"
-        self.time_life = randint(90-10,90+10)          #inizialmente range(10,30) successivamente range(35,55)
+        self.time_life = randint(120-10,120+10)          #inizialmente range(10,30) successivamente range(35,55)
         
         
     
