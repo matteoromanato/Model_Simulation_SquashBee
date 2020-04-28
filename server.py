@@ -10,22 +10,22 @@ def Squash_Bee_portrayal(agent):
     
     if agent is None:
         return
-    portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true"}
+    portrayal = {"Shape": "circle", "r": 0.8, "Filled": "true"}
 
     if type(agent) is Bee:
         #portrayal["Shape"] = "ape.jfif"
         #portrayal["scale"] = 0.9
         portrayal["Color"] = ["#FFFF00", "#FFFF00"]
         portrayal["stroke_color"] = "#000000"
-        portrayal["text"] = round(agent.energy, 1)
         portrayal["text_color"] = "yellow"
         portrayal["Layer"] = 2
     if type(agent) is Bee_son:
         portrayal["Color"] = ["#ADA96E", "#ADA96E"]
         portrayal["stroke_color"] = "#000000"
-        portrayal["text"] = round(agent.time_grow, 1)
-        portrayal["text_color"] = "green"
+        #portrayal["text"] = round(agent.time_grow, 1)
+        #portrayal["text_color"] = "green"
         portrayal["Layer"] = 0
+        portrayal["r"] = 0.2
     if type(agent) is Zucca:
         portrayal["Color"] = ["#FBB917", "#FBB917"]
         portrayal["stroke_color"] = "#000000"
@@ -42,9 +42,10 @@ def Squash_Bee_portrayal(agent):
         portrayal["stroke_color"] = "#000000"
         portrayal["Layer"] = 0
     if type(agent) is flower:
-        portrayal["Color"] = ["#FCDFFF", "#FCDFFF"]
+        portrayal["Color"] = ["#FF0000", "#FF0000"]
         portrayal["stroke_color"] = "#000000"
         portrayal["Layer"] = 1
+        portrayal["r"] = 0.35
     return portrayal
 
 
