@@ -18,28 +18,29 @@ def Squash_Bee_portrayal(agent):
         portrayal["Color"] = ["#FFFF00", "#FFFF00"]
         portrayal["stroke_color"] = "#000000"
         portrayal["text_color"] = "yellow"
-        portrayal["Layer"] = 2
+        portrayal["Layer"] = 3
     if type(agent) is Bee_son:
         portrayal["Color"] = ["#ADA96E", "#ADA96E"]
         portrayal["stroke_color"] = "#000000"
         #portrayal["text"] = round(agent.time_grow, 1)
-        #portrayal["text_color"] = "green"
+        portrayal["text_color"] = "green"
         portrayal["Layer"] = 0
         portrayal["r"] = 0.2
     if type(agent) is Zucca:
         portrayal["Color"] = ["#FBB917", "#FBB917"]
         portrayal["stroke_color"] = "#000000"
-        portrayal["text_color"] = "red"
+        portrayal["text_color"] = "#FBB917"
         portrayal["Layer"] = 1
     if type(agent) is Zucca_flower:
         portrayal["Color"] = ["#8AFB17", "#8AFB17"]
         portrayal["stroke_color"] = "#000000"
         portrayal["text"] = round(agent.time_life, 1)
-        portrayal["text_color"] = "white"
+        portrayal["text_color"] = "#8AFB17"
         portrayal["Layer"] = 1
     if type(agent) is Zucca_seed:
         portrayal["Color"] = ["#C8B560", "#C8B560"]
         portrayal["stroke_color"] = "#000000"
+        portrayal["text_color"] = "#C8B560"
         portrayal["Layer"] = 0
     if type(agent) is flower:
         portrayal["Color"] = ["#FF0000", "#FF0000"]

@@ -39,7 +39,7 @@ class SquashBee(Model):
         for i in range(self.density_bee):   
             x = self.random.randrange(2,33)       
             y = self.random.randrange(2,33)
-            new_bee = Bee((x, y), self, self.density_gender_bee, self.gain_polline_raccolto)
+            new_bee = Bee((x, y), self, self.density_gender_bee, self.gain_polline_raccolto,120)
             self.grid.place_agent(new_bee, (x, y))
             self.schedule.add(new_bee)
 

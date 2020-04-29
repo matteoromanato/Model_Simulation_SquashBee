@@ -3,12 +3,12 @@ from random import *
 
 class Bee(Agent):
    
-    def __init__(self,pos,model, density_gender, gain_polline):
+    def __init__(self,pos,model, density_gender, gain_polline,time):
 
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Bee"                                                     # tipo di agente per identificarlo
-        self.time_life = randint(130,170)                                                        # un'ape vive per circa 150 giorni, ad ogni step toglieremo un punto vita
+        self.time_life = randint(time-10,time+10)                                                        # un'ape vive per circa 150 giorni, ad ogni step toglieremo un punto vita
         self.qnt_polline_perc = 0                                                   # è la quantità di polline che può portare in percentuale e determinerà la probabilità che faccia fecondare un fiore
         self.gain_polline = gain_polline                                            # è l'energia che ottiene andando su un fiore e aumenterà il parametro energy
         self.energy = 100                                                           # energy è l'attributo che definisce l'energia rimanente dell'ape se energy = 0 l'ape non ha trovato abbastanza rifornimento e muore 
@@ -38,12 +38,12 @@ class Bee(Agent):
                     if neighbor.type_agent == "Zucca":
                         possible_steps = self.model.grid.get_neighborhood(neighbor.pos,moore=True,include_center=False)
                         new_position = self.random.choice(possible_steps)
-                        if(self.model.grid.is_cell_empty(new_position)):
-                            new_larva = Bee_son(new_position, self.model)
-                            self.model.grid.place_agent(new_larva, new_position)
-                            self.model.schedule.add(new_larva)
-                            #self.time_son = 5
-                            self.newSon= False
+                        #if(self.model.grid.is_cell_empty(new_position)):
+                        new_larva = Bee_son(new_position, self.model)
+                        self.model.grid.place_agent(new_larva, new_position)
+                        self.model.schedule.add(new_larva)
+                        #self.time_son = 5
+                        self.newSon= False
                 
         # se finisce il tempo allora muore e la rimuovo
         self.time_life -= 1
@@ -61,7 +61,7 @@ class Bee_son(Agent):
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Bee_son"
-        self.time_grow = randint(230,260)
+        self.time_grow = randint(210,230)
         
 
     def step(self):
@@ -70,7 +70,7 @@ class Bee_son(Agent):
             posizione = self.pos
             self.model.grid._remove_agent(self.pos, self)
             self.model.schedule.remove(self)
-            new_bee = Bee(posizione, self.model, self.model.density_gender_bee, self.model.gain_polline_raccolto)
+            new_bee = Bee(posizione, self.model, self.model.density_gender_bee, self.model.gain_polline_raccolto,150)
             self.model.grid.place_agent(new_bee, posizione)
             self.model.schedule.add(new_bee)
 
@@ -83,7 +83,7 @@ class Zucca_seed(Agent):
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Seed"
-        self.time_life = randint(10,20)
+        self.time_life = randint(20,40)
 
     def step(self):
         self.time_life -= 1
@@ -105,7 +105,7 @@ class Zucca_flower(Agent):
         self.pos = pos
         self.impollinato = False
         self.type_agent = "Flower"
-        self.time_life = randint(time-20,time+20)          #inizialmente range(10,30) successivamente range(35,55)
+        self.time_life = randint(time-10,time+10)          #inizialmente range(10,30) successivamente range(35,55)
         self.prob_accoppiamento = prob_accoppiamento
         
     
@@ -155,7 +155,7 @@ class Zucca(Agent):
         super().__init__(pos,model)
         self.pos = pos
         self.type_agent = "Zucca"
-        self.time_life = randint(40,60)
+        self.time_life = randint(50,70)
 
     def step(self):
         self.time_life -= 1
